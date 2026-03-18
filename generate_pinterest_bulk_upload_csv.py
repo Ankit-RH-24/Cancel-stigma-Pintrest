@@ -29,12 +29,12 @@ import pandas as pd
 
 PINTEREST_HEADERS = [
     "Title",
+    "Media URL",
+    "Pinterest board",
     "Description",
     "Link",
-    "Media URL",
-    "Board",
-    "Publish Date",
-    "Alt Text",
+    "Publish date",
+    "Alt text",
 ]
 
 BASE_URL = "https://raw.githubusercontent.com/Ankit-RH-24/Cancel-stigma-Pintrest/main"
@@ -396,12 +396,12 @@ def generate_csv(
         rows.append(
             {
                 "Title": _make_title(config, product, pin_idx),
+                "Media URL": media_url,
+                "Pinterest board": board.strip(),
                 "Description": _make_description(config, product),
                 "Link": store_link,
-                "Media URL": media_url,
-                "Board": board.strip(),
-                "Publish Date": publish_date,
-                "Alt Text": _make_alt_text(config, product),
+                "Publish date": publish_date,
+                "Alt text": _make_alt_text(config, product),
             }
         )
 
