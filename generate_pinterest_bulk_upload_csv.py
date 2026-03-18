@@ -399,14 +399,14 @@ def generate_csv(
                 "Description": _make_description(config, product),
                 "Link": store_link,
                 "Media URL": media_url,
-                "Board": board,
+                "Board": board.strip(),
                 "Publish Date": publish_date,
                 "Alt Text": _make_alt_text(config, product),
             }
         )
 
     df = pd.DataFrame(rows, columns=PINTEREST_HEADERS)
-    df.to_csv(output_csv, index=False)
+    df.to_csv(output_csv, index=False, encoding="utf-8")
     return df
 
 
