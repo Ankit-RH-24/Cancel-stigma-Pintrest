@@ -34,7 +34,7 @@ PINTEREST_HEADERS = [
     "Description",
     "Link",
     "Publish date",
-    "Alt text",
+    "Alt Text",
 ]
 
 BASE_URL = "https://raw.githubusercontent.com/Ankit-RH-24/Cancel-stigma-Pintrest/main"
@@ -63,21 +63,17 @@ PER_FOLDER_TARGET: dict[str, int] = {
 # so that "dark blue" wins over "blue" — handled by _detect_color_key() ordering.
 #
 # Each entry:
-#   name     – trend label
-#   keywords – Pinterest Predicts 2026 keywords (used in title + description)
-#   titles   – list of title templates (rotated by pin index for uniqueness)
-#   desc     – description template; {product} is replaced at runtime
+#   name        – trend label
+#   trend_hook  – punchy hook phrase used as the title opener
+#   keywords    – Pinterest Predicts 2026 keywords (used in description)
+#   desc        – description template; {product} is replaced at runtime
 
 TREND_CONFIG: dict[str, dict] = {
     # ── Cool Blue ──
     "dark blue": dict(
         name="Cool Blue",
+        trend_hook="Glacier Aesthetic",
         keywords=["glacier aesthetic", "subzero sophistication", "icy blue"],
-        titles=[
-            "The Glacier Aesthetic: {product} in Icy Blue",
-            "Subzero Sophistication: {product} Styled in Dark Blue",
-            "Icy Blue Fits: {product} for the Cool Blue Aesthetic",
-        ],
         desc=(
             "Embrace the Cool Blue trend with this {product} from Cancel Stigma — "
             "glacier aesthetics and subzero sophistication woven into every thread. "
@@ -86,12 +82,8 @@ TREND_CONFIG: dict[str, dict] = {
     ),
     "blue": dict(
         name="Cool Blue",
+        trend_hook="Glacier Aesthetic",
         keywords=["glacier aesthetic", "subzero sophistication", "icy blue"],
-        titles=[
-            "The Glacier Aesthetic: {product} in Icy Blue",
-            "Cool Blue Capsule: {product} by Cancel Stigma",
-            "Subzero Sophistication — {product} Styled in Icy Blue",
-        ],
         desc=(
             "Embrace the Cool Blue trend with this {product} from Cancel Stigma — "
             "glacier aesthetics meet subzero sophistication in every detail. "
@@ -101,12 +93,8 @@ TREND_CONFIG: dict[str, dict] = {
     # ── Vamp Romantic ──
     "black": dict(
         name="Vamp Romantic",
+        trend_hook="Dark Romantic",
         keywords=["dark romantic", "after-dark glamour", "haunting and heartbreaking"],
-        titles=[
-            "After-Dark Glamour: {product} in Jet Black",
-            "Dark Romantic Aesthetic: {product} — Vamp Romantic 2026",
-            "Haunting & Heartbreaking: {product} in Jet Black by Cancel Stigma",
-        ],
         desc=(
             "Step into the Vamp Romantic era with this jet black {product} from Cancel Stigma — "
             "dark romantic energy, after-dark glamour, and something hauntingly heartbreaking "
@@ -116,12 +104,8 @@ TREND_CONFIG: dict[str, dict] = {
     # ── Khaki Coded ──
     "brown": dict(
         name="Khaki Coded",
+        trend_hook="Utility Chic",
         keywords=["utility streetwear", "paleontologist aesthetic", "earth tones"],
-        titles=[
-            "Earth Tones Redefined: {product} in Utility Streetwear",
-            "Khaki Coded: {product} for the Paleontologist Aesthetic",
-            "Field-Ready Style: {product} in Earth Tones by Cancel Stigma",
-        ],
         desc=(
             "Go Khaki Coded with this earth-toned {product} from Cancel Stigma — "
             "utility streetwear collides with the paleontologist aesthetic for a look "
@@ -130,12 +114,8 @@ TREND_CONFIG: dict[str, dict] = {
     ),
     "tan": dict(
         name="Khaki Coded",
+        trend_hook="Utility Chic",
         keywords=["utility streetwear", "paleontologist aesthetic", "earth tones"],
-        titles=[
-            "Utility & Earth: {product} in Khaki Coded Style",
-            "The Paleontologist Aesthetic: {product} by Cancel Stigma",
-            "Tan & Intentional — {product} in Cancel Stigma Earth Tones",
-        ],
         desc=(
             "Lean into the Khaki Coded trend with this tan {product} from Cancel Stigma — "
             "a perfect blend of utility streetwear and paleontologist aesthetic. "
@@ -145,12 +125,8 @@ TREND_CONFIG: dict[str, dict] = {
     # ── Laced Up ──
     "white": dict(
         name="Laced Up",
+        trend_hook="Softly Stitched",
         keywords=["softly stitched", "unexpected elegance", "lace details"],
-        titles=[
-            "Softly Stitched: {product} in Unexpected Elegance",
-            "Laced Up Aesthetic: {product} with Lace Details by Cancel Stigma",
-            "Quiet Luxury Redefined — {product} in White",
-        ],
         desc=(
             "Discover the Laced Up trend with this softly stitched {product} from Cancel Stigma — "
             "unexpected elegance woven into every lace detail. "
@@ -159,12 +135,8 @@ TREND_CONFIG: dict[str, dict] = {
     ),
     "cream": dict(
         name="Laced Up",
+        trend_hook="Softly Stitched",
         keywords=["softly stitched", "unexpected elegance", "lace details"],
-        titles=[
-            "Cream & Considered: {product} in Laced Up Style",
-            "Unexpected Elegance: {product} in Soft Cream by Cancel Stigma",
-            "Softly Stitched Perfection — {product} with Lace Details",
-        ],
         desc=(
             "The Laced Up trend gets a cream-toned moment with this {product} from Cancel Stigma — "
             "softly stitched, wrapped in unexpected elegance, finished with lace details "
@@ -174,12 +146,8 @@ TREND_CONFIG: dict[str, dict] = {
     # ── Poetcore ──
     "oversized": dict(
         name="Poetcore",
+        trend_hook="Poet Aesthetic",
         keywords=["inner wordsmith", "vintage blazers", "the poet aesthetic"],
-        titles=[
-            "The Poet Aesthetic: Oversized {product} for the Inner Wordsmith",
-            "Poetcore Vibes: {product} in Vintage Blazer Energy",
-            "Inner Wordsmith Style — Oversized {product} by Cancel Stigma",
-        ],
         desc=(
             "Channel your inner wordsmith with this oversized {product} from Cancel Stigma — "
             "Poetcore energy, vintage blazer soul, and the poet aesthetic from collar to hem. "
@@ -187,15 +155,10 @@ TREND_CONFIG: dict[str, dict] = {
         ),
     ),
     # ── Pink / Green fallback to Laced Up / Khaki Coded respectively ──
-    # (These keys are checked after the explicit ones above.)
     "pink": dict(
         name="Laced Up",
+        trend_hook="Blush Romantic",
         keywords=["softly stitched", "unexpected elegance", "lace details"],
-        titles=[
-            "Softly Stitched in Pink: {product} by Cancel Stigma",
-            "Unexpected Elegance: {product} in Blush Pink",
-            "Laced Up in Pink — {product} for the Feminine Aesthetic",
-        ],
         desc=(
             "The Laced Up trend takes a blush turn with this pink {product} from Cancel Stigma — "
             "softly stitched with unexpected elegance and a whisper of lace details. "
@@ -204,12 +167,8 @@ TREND_CONFIG: dict[str, dict] = {
     ),
     "green": dict(
         name="Khaki Coded",
+        trend_hook="Earth Tones",
         keywords=["utility streetwear", "paleontologist aesthetic", "earth tones"],
-        titles=[
-            "Earth Tones in Green: {product} — Khaki Coded by Cancel Stigma",
-            "Utility Streetwear: {product} in Olive Green",
-            "Paleontologist Aesthetic — {product} in Earthy Green",
-        ],
         desc=(
             "Go earthy with this green {product} from Cancel Stigma — Khaki Coded utility streetwear "
             "meets the paleontologist aesthetic in every stitch. "
@@ -217,6 +176,17 @@ TREND_CONFIG: dict[str, dict] = {
         ),
     ),
 }
+
+# Aesthetic hooks cycled through pins for title variety.
+# Format already includes the separator so titles read naturally.
+AESTHETIC_HOOKS = [
+    "| Minimalist Vibe",
+    "| 2026 Style",
+    "| Cancel Stigma",
+    "| Wardrobe Essential",
+    "| Streetwear Edit",
+    "| Aesthetic Choice",
+]
 
 # Per-category fallback colour key when a subfolder name doesn't match any TREND_CONFIG key
 # (also used for images sitting directly at the category-folder root).
@@ -291,10 +261,21 @@ def _raw_url(base: str, *segments: str) -> str:
     return f"{base.rstrip('/')}/{encoded}"
 
 
-def _make_title(config: dict, product: str, pin_index: int) -> str:
-    """Rotate through the trend's title templates so each pin gets a unique title."""
-    templates = config["titles"]
-    return templates[pin_index % len(templates)].format(product=product)
+def _make_title(config: dict, color_key: str, product: str, filename: str, pin_index: int) -> str:
+    """
+    Build a unique title from three parts:
+      1. Trend Hook  — e.g. "Glacier Aesthetic"
+      2. Color/Product — e.g. "Dark Blue Basic Tee"
+      3. Aesthetic Hook — cycled from AESTHETIC_HOOKS by pin_index
+
+    The filename stem (first 6 chars) is kept as a fallback; the dedup pass
+    in generate_csv appends it only when a collision is detected.
+    """
+    trend_hook = config["trend_hook"]
+    color_label = color_key.replace("-", " ").title()
+    color_product = f"{color_label} {product}"
+    hook = AESTHETIC_HOOKS[pin_index % len(AESTHETIC_HOOKS)]
+    return f"{trend_hook}: {color_product} {hook}"
 
 
 def _make_description(config: dict, product: str) -> str:
@@ -395,15 +376,33 @@ def generate_csv(
 
         rows.append(
             {
-                "Title": _make_title(config, product, pin_idx),
+                "Title": _make_title(config, color_key, product, filename, pin_idx),
                 "Media URL": media_url,
                 "Pinterest board": board.strip(),
                 "Description": _make_description(config, product),
                 "Link": store_link,
                 "Publish date": publish_date,
-                "Alt text": _make_alt_text(config, product),
+                "Alt Text": _make_alt_text(config, product),
+                # Store filename stem for dedup fallback (dropped before CSV export).
+                "_filename_stem": os.path.splitext(filename)[0][:6],
             }
         )
+
+    # ── Deduplication pass ────────────────────────────────────────────────────
+    # If any two rows share the same Title, append the filename stem to make
+    # every title 100% unique, regardless of how many images share a trend+color.
+    seen: dict[str, int] = {}
+    for row in rows:
+        t = row["Title"]
+        seen[t] = seen.get(t, 0) + 1
+
+    collision_counts: dict[str, int] = {}
+    for row in rows:
+        t = row["Title"]
+        if seen[t] > 1:
+            stem = row["_filename_stem"]
+            row["Title"] = f"{t} — {stem}"
+        del row["_filename_stem"]       # remove internal helper key before export
 
     df = pd.DataFrame(rows, columns=PINTEREST_HEADERS)
     df.to_csv(output_csv, index=False, encoding="utf-8")
